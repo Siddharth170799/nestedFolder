@@ -71,11 +71,13 @@
 
 import React from 'react'
 import Practice from './Practice'
+import Practice2 from './Practice2'
 
 const App = () => {
   return (
     <div>
-      <Practice/>
+      {/* <Practice/> */}
+      <Practice2/>
     </div>
   )
 }
