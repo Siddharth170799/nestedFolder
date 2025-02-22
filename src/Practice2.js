@@ -1,107 +1,3 @@
-// import React, { Children, useState } from "react";
-// import json from "./data2.json";
-// import "./App.css"
-
-// const List = ({ list, addCommentToTheList, deleteCommentFromTheList }) => {
-//   const [isEnabled, setisEnabled] = useState({});
-//   console.log(isEnabled);
-//   return list.map((node, index) => {
-//     return (
-//       <>
-//         <div>
-//           {node.isNested && (
-//             <span
-//               onClick={() =>
-//                 setisEnabled({
-//                   ...isEnabled,
-//                   [node.comment]: !isEnabled[node.comment],
-//                 })
-//               }
-//             >
-//               {isEnabled[node.comment] ? "-" : "+"}
-//             </span>
-//           )}
-//           {node?.comment}
-//           <span
-//             onClick={() => addCommentToTheList(node.id)}
-//             style={{ marginLeft: "20px" }}
-//           >
-//             Reply
-//           </span>
-//           <span style={{marginLeft:"20px"}} onClick={() => deleteCommentFromTheList(node.id)}>Delete </span>
-//         </div>
-//         {isEnabled[node.comment] && node?.isNested && (
-//           <List
-//             list={node.nestedComments}
-//             addCommentToTheList={addCommentToTheList}
-//             deleteCommentFromTheList={deleteCommentFromTheList}
-//           />
-//         )}
-//       </>
-//     );
-//   });
-// };
-
-// const Practice2 = () => {
-//   const [data, setData] = useState(json);
-
-//   const addCommentToTheList = (id) => {
-//     const name = prompt("Enter The Comment");
-
-//     const updateCommentsToTheList = (list) => {
-//       return list.map((item) => {
-//         if (item.id == id) {
-//           return {
-//             ...item,
-//             nestedComments: [
-//               ...item.nestedComments,
-//               { id: "123", comment: name, nestedComments: [] },
-//             ],
-//           };
-//         } else if (item.nestedComments) {
-//           return {
-//             ...item,
-//             nestedComments: updateCommentsToTheList(item.nestedComments),
-//           };
-//         } else {
-//         }
-//         return item;
-//       });
-//     };
-
-//     setData(updateCommentsToTheList(data));
-//   };
-
-//   const deleteCommentFromTheList = (id) => {
-//     const updateCommentsToTheList = (list) => {
-//       return list
-//         .filter((item) => item.id != id)
-//         .map((item) => {
-//           if (item.nestedComments) {
-//             return {
-//               ...item,
-//               nestedComments: updateCommentsToTheList(item.nestedComments),
-//             };
-//           } else {
-//             return item;
-//           }
-//         });
-//     };
-//     setData(updateCommentsToTheList(data));
-//   };
-
-//   return (
-//     <div>
-//       <List
-//         list={data}
-//         addCommentToTheList={addCommentToTheList}
-//         deleteCommentFromTheList={deleteCommentFromTheList}
-//       />
-//     </div>
-//   );
-// };
-
-// export default Practice2;
 import React, { useState } from "react";
 import json from "./data2.json";
 
@@ -159,7 +55,7 @@ const Practice2 = () => {
             isNested:true,
             nestedComments: [
               ...item.nestedComments,
-              { id: Math.random().toString(), comment: name, nestedComments: [] },
+              { id: Math.random(), comment: name, nestedComments: [] },
             ],
           };
         } else if (item.nestedComments) {
@@ -177,24 +73,30 @@ const Practice2 = () => {
 
   const deleteCommentFromTheList = (id) => {
     const updateCommentsToTheList = (list) => {
-      return list
-        .filter((item) => item.id !== id)
-        .map((item) => ({
-          ...item,
-          nestedComments: updateCommentsToTheList(item.nestedComments),
-        }));
-    };
-    setData(updateCommentsToTheList(data));
+        return list
+                .filter((item) => item.id != id)
+                .map((item) => {
+                  if (item.nestedComments) {
+                    return {
+                      ...item,
+                      nestedComments: updateCommentsToTheList(item.nestedComments),
+                    };
+                  } else {
+                    return item;
+                  }
+                });
+            };
+            setData(updateCommentsToTheList(data));
   };
 
   return (
     <div className="comment-section">
       <h2 style={{textAlign:"center"}}>Nested Comments</h2>
-      <List 
+     {data.length > 0 ? <List 
         list={data} 
         addCommentToTheList={addCommentToTheList} 
         deleteCommentFromTheList={deleteCommentFromTheList} 
-      />
+      /> :<div style={{textAlign:"center"}}>No Comments</div>} 
     </div>
   );
 };
