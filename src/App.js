@@ -72,12 +72,16 @@
 import React from 'react'
 import Practice from './Practice'
 import Practice2 from './Practice2'
+import Practice3 from "./Practice3"
+import Practice4 from './Practice4'
 
 const App = () => {
   return (
     <div>
-      {/* <Practice/> */}
-      <Practice2/>
+      <Practice/>
+      {/* <Practice2/> */}
+      {/* <Practice3/> */}
+      {/* <Practice4/> */}
     </div>
   )
 }

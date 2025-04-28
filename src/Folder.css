@@ -1,0 +1,64 @@
+/* styles.css */
+
+/* Global styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Container styles */
+  .container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  
+  /* Folder item */
+  .folder-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #eef2ff;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px 0;
+    cursor: pointer;
+  }
+  
+  .folder-item div {
+    flex-grow: 1;
+    font-weight: bold;
+  }
+  
+  /* Buttons */
+  button {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 5px;
+    transition: background 0.3s ease;
+  }
+  
+  button:hover {
+    background: #357ABD;
+  }
+  
+  /* Child list styling */
+  .child-list {
+    padding-left: 20px;
+    border-left: 2px solid #ccc;
+    margin-left: 10px;
+  }

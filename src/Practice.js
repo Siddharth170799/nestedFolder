@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import json from "./data.json";
 import "./App.css";
 
-const List = ({ list, addNodeToList,deleteNodeFromList }) => {
+const List = ({ list, addNodeToList, deleteNodeFromList }) => {
   const [isExpanded, setIsExpanded] = useState({});
   return (
     <div className="container">
@@ -25,19 +25,25 @@ const List = ({ list, addNodeToList,deleteNodeFromList }) => {
               <span>{node.name}</span>
               {node.isFolder && (
                 <>
-                <span onClick={() => addNodeToList(node.id)}>
-                  {" "}
-                  <img
-                    src="https://static.vecteezy.com/system/resources/previews/000/439/792/original/vector-folder-icon.jpg"
-                    alt="icon"
-                    className="icon"
-                  />{" "}
-                </span>
-                <span onClick={()=>deleteNodeFromList(node.id)}>Delete</span>
+                  <span onClick={() => addNodeToList(node.id)}>
+                    {" "}
+                    <img
+                      src="https://static.vecteezy.com/system/resources/previews/000/439/792/original/vector-folder-icon.jpg"
+                      alt="icon"
+                      className="icon"
+                    />{" "}
+                  </span>
+                  <span onClick={() => deleteNodeFromList(node.id)}>
+                    Delete
+                  </span>
                 </>
               )}
               {isExpanded[node.name] && node?.children && (
-                <List list={node.children} addNodeToList={addNodeToList} deleteNodeFromList={deleteNodeFromList} />
+                <List
+                  list={node.children}
+                  addNodeToList={addNodeToList}
+                  deleteNodeFromList={deleteNodeFromList}
+                />
               )}
             </div>
           </>
@@ -71,25 +77,29 @@ const Practice = () => {
     }
     setData(updateTree(data));
   };
-  const deleteNodeFromList=(parentId)=>{
-    function updateTree(list){
-        return list.map((node) => {
-            if (node.id == parentId) {
-            return list.filter((node)=> node.id != parentId)
-            } else if (node.children) {
-              return { ...node, children: updateTree(node.children) };
-            } else {
-              return node;
-            }
-          });
+  const deleteNodeFromList = (parentId) => {
+    function updateTree(list) {
+      return list.map((node) => {
+        if (node.id == parentId) {
+          return list.filter((node) => node.id != parentId);
+        } else if (node.children) {
+          return { ...node, children: updateTree(node.children) };
+        } else {
+          return node;
+        }
+      });
     }
-    setData(updateTree(data))
-  }
+    setData(updateTree(data));
+  };
   return (
     <>
       <div className="App">
         <h1>FileExplorer</h1>
-        <List list={data} addNodeToList={addNodeToList} deleteNodeFromList={deleteNodeFromList} />
+        <List
+          list={data}
+          addNodeToList={addNodeToList}
+          deleteNodeFromList={deleteNodeFromList}
+        />
       </div>
     </>
   );
